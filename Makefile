@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -O3
 #DEPS =
-SRCS = main.c setup.c application.c
+SRCS = main.c output.c setup.c application.c
 OBJS = $(SRCS:.c=.o)
 MAIN = SPH
 
