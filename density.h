@@ -2,6 +2,6 @@
 #define  DENSITY_H
 
 struct arrays;
-void  getDensity(struct arrays *particleData);
+void  getDensity(int particles, struct arrays *particleData);
 
 #endif // DENSITY_H

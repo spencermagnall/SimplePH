@@ -2,6 +2,6 @@
 #define GHOSTS_H
 
 struct arrays;
-void setGhosts(struct arrays *particleData);
+void setGhosts(int particles, struct arrays *particleData);
 
 #endif // GHOSTS_H

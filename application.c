@@ -3,14 +3,16 @@
 #include "application.h"
 #include "setup.h"
 #include "output.h"
+#include "ghosts.h"
 #include "density.h"
 void application(){
     printf("Working Correctly\n");
     struct arrays particleData;
-    int particlesSetup = setup(&particleData);
-    printf("%d",particlesSetup);
+    int particles = setup(&particleData);
+    //printf("%d",particlesSetup);
     printf("\n");
-    getDensity(&particleData);
+    setGhosts(particles,&particleData);
+    getDensity(particles,&particleData);
     writeOutput(&particleData,0);
 
 }

@@ -5,14 +5,14 @@
 
 struct arrays
 {
-    float x[nopart];
-    float v[nopart];
-    float m[nopart];
-    float h[nopart];
-    float rho[nopart];
-    float u[nopart];
-    float P[nopart];
-    float cs[nopart];
+    float x[nopart+noghost];
+    float v[nopart+noghost];
+    float m[nopart+noghost];
+    float h[nopart+noghost];
+    float rho[nopart+noghost];
+    float u[nopart+noghost];
+    float P[nopart+noghost];
+    float cs[nopart+noghost];
 
 };
 
