@@ -2,6 +2,7 @@
 #include "arrays.h"
 #include "const.h"
 #include <math.h>
+#include <stdio.h>
 
 int setup(struct arrays *particleData){
     // SETUP PARTICLES
@@ -12,6 +13,7 @@ int setup(struct arrays *particleData){
     float rho0 = 1.0;
     float dx = (xmax-xmin)/nopart;
     float drho = (rho0)/nopart;
+    printf("%f",drho);
     float x = xmin;
     int particleSetup = 0;
     for(int i=0; i < nopart;i++){
