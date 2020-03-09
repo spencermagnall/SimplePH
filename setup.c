@@ -4,54 +4,71 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 int setup(struct arrays *particleData){
     // SETUP PARTICLES
-    float xmin = 0.0;
-    float xmax = 1.0;
+    // Should migrate some of these values to const
+    //float xmin = 0.0;
+    //float xmax = 1.0;
     float cs = 1.0;
     // rho is const
     float rho0 = 1.0;
     // Should dx be a fixed value that determines
     // no part setup ???
     // float dx = (xmax-xmin)/nopart;
-    float dx  = 0.01;
+     float dx  = 1./99.;      
+     //for 0-1 inclusive
+    //float dx = 0.99
     // float drho = (rho0)/nopart;
     //printf("%f",drho);
     float x = xmin;
     int particleNo = 0;
-    while(x < xmax){
+    int particleIndex = 0;
+
+    // Particles should not be allowed to be placed on boundaries
+    // i.e start at xmin+dx and end at xmax-dx or vice-versa
+    // have to handle boundary conditions carefully with ghost particles
+
+    while(x < xmax + dx ){
+       
+        particleNo+= 1;
+        printf("Particle no: %d \n",particleNo);
+        printf("%f \n", x);  
         
         // Check that we have not exceeded maxp
-        if (particleNo > nopart){
+        if (particleNo  > nopart){
             printf("Need a larger MaxP!\n");
             exit(1);
         }
 
-        printf("%d \n",particleNo);
+        
         
         // Set Particle Position
-        particleData->x[particleNo] = x;
+        particleData->x[particleIndex] = x;
         
         // Set Mass
         // particleData->m[i] = drho;
         // Have to set mass later 
 
         // Set Velocity
-        particleData->v[particleNo] = cs*1.e-4*sin(x);
+        particleData->v[particleIndex] = cs*1.e-4*sin(x);
         // Set Smoothing Link
-        particleData->h[particleNo] = 1.2*dx;
-       
+        particleData->h[particleIndex] = 1.2*dx;
+        // A real particle
+        particleData->exists[particleIndex] = true;
         // Move to next particle 
         x+=dx;
-        particleNo+= 1;
+        particleIndex++;
+        
             
     }
 
     // setup mass distribution
-    float mpart = rho0/particleNo;
-    for (int i=0; i < particleNo; i++){
+    float mpart = rho0*dx;
+    for (int i=0; i < particleIndex ; i++){
         particleData->m[i] = mpart;
+        printf("index is: %d \n ",i);
     }
     return particleNo;
 }

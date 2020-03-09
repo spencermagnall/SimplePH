@@ -22,8 +22,9 @@ void getDensity(int particles,struct arrays *particleData){
         rho = 0.0;
         h = particleData->h[i];
         ra = particleData->x[i];
-        for (int j=0; j < particles + noghost; j++){
-            //if (i != j) {
+        printf("i is: %d \n",i);
+        for (int j=0; j < particles + noghost-1; j++){
+            if (particleData->exists[j] == true) {
                 printf("%d \n",j);
                 partMass = particleData->m[j];
                 rb = particleData->x[j];
@@ -31,6 +32,7 @@ void getDensity(int particles,struct arrays *particleData){
                 Cnorm = 2.0/3.0;
                 q = dx/h;
                 getKernel(q,&wkern,&grkern);
+                /*
                 printf("h: ");
                 printf("%f \n",h);
                 printf("q: ");
@@ -40,13 +42,15 @@ void getDensity(int particles,struct arrays *particleData){
                 float cnormh = Cnorm/(h);
                 printf("cnormh: ");
                 printf("%f \n",cnormh);
+                */
                 Wab = (Cnorm/h)*wkern;
-                printf("Wab: ");
-                printf("%f \n", Wab);
+                //printf("Wab: ");
+                //printf("%f \n", Wab);
                 rho += partMass*Wab;
-                printf("rho: ");
-                printf("%f \n", rho);
-            //}
+                //printf("rho: ");
+                //printf("%f \n", rho);
+            }
+            
         }
         particleData->rho[i] = rho;
 

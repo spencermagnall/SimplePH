@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -O3
+CFLAGS = -O3 -std=c11
 #DEPS =
 SRCS = main.c ghosts.c kernel.c density.c output.c setup.c application.c
 OBJS = $(SRCS:.c=.o)
