@@ -5,6 +5,7 @@
 #include "output.h"
 #include "ghosts.h"
 #include "density.h"
+#include "derivs.h"
 #include <stdlib.h>
 void application(){
     printf("Working Correctly\n");
@@ -22,6 +23,7 @@ void application(){
     // passes particles-1 since arrays start at 0
     setGhosts(particles,&particleData);
     getDensity(particles,&particleData);
+    derivs(particles,&particleData);
     writeOutput(particles, &particleData,0);
 
 }

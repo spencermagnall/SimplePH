@@ -52,7 +52,7 @@ int setup(struct arrays *particleData){
         // Have to set mass later 
 
         // Set Velocity
-        particleData->v[particleIndex] = cs*1.e-4*sin(x);
+        particleData->v[particleIndex] = cs*1.e-4*sin(2*M_PI*x);
         // Set Smoothing Link
         particleData->h[particleIndex] = 1.2*dx;
         // A real particle

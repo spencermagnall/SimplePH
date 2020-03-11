@@ -32,6 +32,10 @@ void getDensity(int particles,struct arrays *particleData){
                 Cnorm = 2.0/3.0;
                 q = dx/h;
                 getKernel(q,&wkern,&grkern);
+                
+                // store grkern for later
+                particleData->grkerns[i][j] = grkern;
+                
                 /*
                 printf("h: ");
                 printf("%f \n",h);
