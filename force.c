@@ -31,7 +31,7 @@ void getAccel(int particles, struct arrays *particleData){
     
 
 
-    for (int i=0; i<particles; i++){
+    for (int i=0; i<particles+noghost; i++){
         rhoa = particleData->rho[i];
         pressurea = particleData->P[i];
         a = 0.0;
@@ -39,7 +39,7 @@ void getAccel(int particles, struct arrays *particleData){
         xa = particleData->x[i];
         // Should I store grkern or recalculate
         // Stored currently can be accesed in particleData
-        for (int j=0; j<particles; j++){
+        for (int j=0; j<particles+noghost; j++){
              if (i != j){
                 xb = particleData->x[j];
                 da = xa-xb;
@@ -62,12 +62,12 @@ void getAccel(int particles, struct arrays *particleData){
                 gradb = grkernb*(1.0/hb)*(db/dbnorm);
                 massb = particleData->m[j];
                 a += -massb*(pressurea/(rhoa*rhoa)*(2./(3.0*ha))*grada + pressureb/(rhob*rhob)*(2./(3.0*hb))*gradb);
-                printf("acell: ");
-                printf("%f \n",a);
-                printf("pressure a: %f \n",pressurea);
-                printf("pressure b: %f \n", pressureb);
-                printf("grkern a: %f \n",grkerna);
-                printf("grkern b: %f \n",grkernb);
+                //printf("acell: ");
+                //printf("%f \n",a);
+                //printf("pressure a: %f \n",pressurea);
+                //printf("pressure b: %f \n", pressureb);
+                //printf("grkern a: %f \n",grkerna);
+                //printf("grkern b: %f \n",grkernb);
             }
         }
 

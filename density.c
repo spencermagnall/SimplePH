@@ -18,14 +18,14 @@ void getDensity(int particles,struct arrays *particleData){
     float Wab = 0.0;
     float partMass = 0.0;
 
-    for (int i=0; i < particles; i++){
+    for (int i=0; i < nopart+noghost; i++){
         rho = 0.0;
         h = particleData->h[i];
         ra = particleData->x[i];
-        printf("i is: %d \n",i);
-        for (int j=0; j < particles + noghost-1; j++){
+        //printf("i is: %d \n",i);
+        for (int j=0; j < particles + noghost; j++){
             if (particleData->exists[j] == true) {
-                printf("%d \n",j);
+                //printf("j is: %d \n",j);
                 partMass = particleData->m[j];
                 rb = particleData->x[j];
                 dx = fabs(ra-rb);

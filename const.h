@@ -10,5 +10,7 @@
 #define xmin 0.0
 #define xmax 1.0
 // timestep interval
-#define dt  0.1
+#define dt  0.001
+// output interval
+#define dtout 0.1
 #endif //CONST_H

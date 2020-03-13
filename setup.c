@@ -17,12 +17,19 @@ int setup(struct arrays *particleData){
     // Should dx be a fixed value that determines
     // no part setup ???
     // float dx = (xmax-xmin)/nopart;
-     float dx  = 1./99.;      
+    // start and end pos for particles so they aren't on boundaries
+    float start = 0.05;
+    float end = xmax - start;
+    float dx  = (xmax)/nopart;
+    start = 0.5*dx;
+    
+    // NO!
+    #define dt dx*2.0 
      //for 0-1 inclusive
     //float dx = 0.99
     // float drho = (rho0)/nopart;
     //printf("%f",drho);
-    float x = xmin;
+    float x = start;
     int particleNo = 0;
     int particleIndex = 0;
 
@@ -30,7 +37,7 @@ int setup(struct arrays *particleData){
     // i.e start at xmin+dx and end at xmax-dx or vice-versa
     // have to handle boundary conditions carefully with ghost particles
 
-    while(x < xmax + dx ){
+    while(x < xmax){
        
         particleNo+= 1;
         printf("Particle no: %d \n",particleNo);
@@ -46,7 +53,7 @@ int setup(struct arrays *particleData){
         
         // Set Particle Position
         particleData->x[particleIndex] = x;
-        
+        printf("x is: %f \n"); 
         // Set Mass
         // particleData->m[i] = drho;
         // Have to set mass later 
