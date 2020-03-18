@@ -1,6 +1,6 @@
 #ifndef KERNEL_H
 #define KERNEL_H
 
-void getKernel(float q, float *wkern,float *grkern);
+void getKernel(double q, double *wkern,double *grkern);
 
 #endif // KERNEL_H

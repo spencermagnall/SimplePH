@@ -5,33 +5,34 @@
 #include <stdio.h>
 #include <math.h>
 void getAccel(int particles, struct arrays *particleData){
-    float rhoa;
-    float rhob;
-    float pressurea;
-    float pressureb;
-    float grkerna = 0.0;
-    float grkernb= 0.0;
-    float massb;
-    float a;
-    float ha;
-    float hb;
-    float wkern =0.0;
-    float xa;
-    float xb;
-    float dx;
-    float q;
-    float grada;
-    float gradb;
-    float da;
-    float da2;
-    float danorm;
-    float db;
-    float db2;
-    float dbnorm;
+    double rhoa;
+    double rhob;
+    double pressurea;
+    double pressureb;
+    double grkerna = 0.0;
+    double grkernb= 0.0;
+    double massb;
+    double a;
+    double ha;
+    double hb;
+    double wkern =0.0;
+    double xa;
+    double xb;
+    double dx;
+    double q;
+    double grada;
+    double gradb;
+    double da;
+    double da2;
+    double danorm;
+    double db;
+    double db2;
+    double dbnorm;
+    double sigma = 2./3.;
     
 
 
-    for (int i=0; i<particles+noghost; i++){
+    for (int i=0; i<particles; i++){
         rhoa = particleData->rho[i];
         pressurea = particleData->P[i];
         a = 0.0;
@@ -51,23 +52,29 @@ void getAccel(int particles, struct arrays *particleData){
                 hb = particleData->h[j];
                 rhob = particleData->rho[j];
                 pressureb = particleData->P[j];
-                grkerna = particleData->grkerns[i][j];
-                grkernb = particleData->grkerns[j][i];
-                //q = dx/ha;
-                //getKernel(q,&wkern,&grkerna);
-                dx = fabs(xb-xa);
-                //q = dx/hb;
-                //getKernel(q,&wkern,&grkernb);
-                grada = grkerna*(1.0/ha)*(da/danorm);
-                gradb = grkernb*(1.0/hb)*(db/dbnorm);
+                dx = fabs(xa-xb);
+                //grkerna = particleData->grkerns[i][j];
+                //grkernb = particleData->grkerns[j][i];
+                q = dx/ha;
+                getKernel(q,&wkern,&grkerna);
+                //dx = fabs(xb-xa);
+                q = dx/hb;
+                getKernel(q,&wkern,&grkernb);
+
+                grada = sigma*grkerna*(1.0/(ha*ha))*(da/danorm);
+                gradb = sigma*grkernb*(1.0/(hb*hb))*(da/danorm);
                 massb = particleData->m[j];
-                a += -massb*(pressurea/(rhoa*rhoa)*(2./(3.0*ha))*grada + pressureb/(rhob*rhob)*(2./(3.0*hb))*gradb);
-                //printf("acell: ");
-                //printf("%f \n",a);
-                //printf("pressure a: %f \n",pressurea);
-                //printf("pressure b: %f \n", pressureb);
-                //printf("grkern a: %f \n",grkerna);
-                //printf("grkern b: %f \n",grkernb);
+                a += -massb*((pressurea/(rhoa*rhoa))*grada + (pressureb/(rhob*rhob))*gradb);
+                
+                //printf("j is: %d \n", j);
+                /*
+                printf("acell: ");
+                printf("%f \n",a);
+                printf("pressure a: %f \n",pressurea);
+                printf("pressure b: %f \n", pressureb);
+                printf("grkern a: %f \n",grkerna);
+                printf("grkern b: %f \n",grkernb);
+                */
             }
         }
 

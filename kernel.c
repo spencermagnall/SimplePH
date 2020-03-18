@@ -1,8 +1,8 @@
 #include "kernel.h"
 #include <math.h>
 
-void getKernel(float q, float *wkern, float *grkern){
-    float q2 = pow(q,2.0);
+void getKernel(double q, double *wkern, double *grkern){
+    double q2 = pow(q,2.0);
 
     if (q < 1.){
         *wkern = 0.75*q2*q - 1.5*q2 + 1.;

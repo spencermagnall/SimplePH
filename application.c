@@ -6,15 +6,16 @@
 #include "ghosts.h"
 #include "density.h"
 #include "derivs.h"
+#include "kinetic.h"
 #include "step.h"
 #include <stdlib.h>
 void application(){
-    float t = 0.0;
-    float tmax = 5.0;
+    double t = 0.0;
+    double tmax = 5.0;
     printf("Working Correctly\n");
     struct arrays particleData;
     int ifile = 1;
-    float tprint = (float)ifile*dtout;
+    double tprint = (double)ifile*dtout;
 
     // This would be easy in c++ 
     for (int i=0; i < nopart+noghost; i++){
@@ -32,7 +33,7 @@ void application(){
     //printf("Density calc passed. \n");
     derivs(particles,&particleData);
     printf("Derivs passed. \n");
-    writeOutput(particles, &particleData,0);
+    writeOutput(particles, &particleData,0,t);
     printf("Write output passed \n");
     //exit(0);
     while (t < tmax){
@@ -42,11 +43,13 @@ void application(){
 
         }
         step(particles, &particleData);
-        printf("Time is: %f \n", t); 
+        printf("Time is: %f \n", t);
+        //double ke = getKinetic(particles,&particleData);
+        //printf("Kinetic Energy: %f \n",ke);
         if (t > tprint){
-            writeOutput(particles, &particleData,ifile);
+            writeOutput(particles, &particleData,ifile,t);
             ifile += 1;
-            tprint = (float) ifile*dtout;
+            tprint = (double) ifile*dtout;
             //exit(0);
             if (ifile == 10){
                 //exit(0);

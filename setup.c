@@ -9,27 +9,27 @@
 int setup(struct arrays *particleData){
     // SETUP PARTICLES
     // Should migrate some of these values to const
-    //float xmin = 0.0;
-    //float xmax = 1.0;
-    float cs = 1.0;
+    //double xmin = 0.0;
+    //double xmax = 1.0;
+    double cs = 1.0;
     // rho is const
-    float rho0 = 1.0;
+    double rho0 = 1.0;
     // Should dx be a fixed value that determines
     // no part setup ???
-    // float dx = (xmax-xmin)/nopart;
+    // double dx = (xmax-xmin)/nopart;
     // start and end pos for particles so they aren't on boundaries
-    float start = 0.05;
-    float end = xmax - start;
-    float dx  = (xmax)/nopart;
+    double start = 0.05;
+    double end = xmax - start;
+    double dx  = (xmax)/nopart;
     start = 0.5*dx;
     
     // NO!
-    #define dt dx*2.0 
+    //#define dt dx*2.0 
      //for 0-1 inclusive
-    //float dx = 0.99
-    // float drho = (rho0)/nopart;
+    //double dx = 0.99
+    // double drho = (rho0)/nopart;
     //printf("%f",drho);
-    float x = start;
+    double x = start;
     int particleNo = 0;
     int particleIndex = 0;
 
@@ -72,7 +72,7 @@ int setup(struct arrays *particleData){
     }
 
     // setup mass distribution
-    float mpart = rho0*dx;
+    double mpart = rho0*dx;
     for (int i=0; i < particleIndex ; i++){
         particleData->m[i] = mpart;
         printf("index is: %d \n ",i);

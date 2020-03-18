@@ -5,15 +5,15 @@
 #include <stdbool.h>
 struct arrays
 {
-    float x[nopart+noghost];
-    float v[nopart+noghost];
-    float a[nopart+noghost];
-    float m[nopart+noghost];
-    float h[nopart+noghost];
-    float rho[nopart+noghost];
-    float u[nopart+noghost];
-    float P[nopart+noghost];
-    float cs[nopart+noghost];
+    double x[nopart+noghost];
+    double v[nopart+noghost];
+    double a[nopart+noghost];
+    double m[nopart+noghost];
+    double h[nopart+noghost];
+    double rho[nopart+noghost];
+    double u[nopart+noghost];
+    double P[nopart+noghost];
+    double cs[nopart+noghost];
 
     // This is an additional flag to prevent
     // garbage values being used in calculations
@@ -24,7 +24,7 @@ struct arrays
     // Since this is calculated for density but 
     // not used until the accel calc
     // Grad Wab = grkerns[a][b]
-    float grkerns[nopart+noghost][nopart+noghost];
+    double grkerns[nopart+noghost][nopart+noghost];
 
 };
 

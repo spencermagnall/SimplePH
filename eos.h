@@ -1,6 +1,6 @@
 #ifndef EOS_H
 #define EOS_H
 
-void equationOfState(float density, float *pressure, float *soundspeed);
+void equationOfState(double density, double *pressure, double *soundspeed);
 
 #endif // EOS_H
