@@ -2,8 +2,15 @@
 #include "const.h"
 #include "arrays.h"
 #include "kernel.h"
+#include "viscosity.h"
 #include <stdio.h>
 #include <math.h>
+
+double getVsig(double cs, double vab, double rab){
+    double vsig = alpha*cs - beta*(vab*rab);
+    return vsig;
+}
+
 void getAccel(int particles, struct arrays *particleData){
     double rhoa;
     double rhob;
@@ -29,6 +36,11 @@ void getAccel(int particles, struct arrays *particleData){
     double db2;
     double dbnorm;
     double sigma = 2./3.;
+    double va;
+    double vb;
+    double vab;
+    double rab;
+    double qab;
     
 
 
@@ -38,21 +50,36 @@ void getAccel(int particles, struct arrays *particleData){
         a = 0.0;
         ha = particleData->h[i];
         xa = particleData->x[i];
+        va = particleData->v[i];
         // Should I store grkern or recalculate
         // Stored currently can be accesed in particleData
         for (int j=0; j<particles+noghost; j++){
              if (i != j){
                 xb = particleData->x[j];
+                vb = particleData->v[j];
                 da = xa-xb;
                 da2 = da*da;
                 danorm = sqrt(da2);
                 db = xb-xa;
                 db2 = db*db;
-                dbnorm = sqrt(da2);
+                dbnorm = sqrt(db2);
                 hb = particleData->h[j];
                 rhob = particleData->rho[j];
                 pressureb = particleData->P[j];
                 dx = fabs(xa-xb);
+
+                // for particle a
+                rab = da/danorm;
+                vab = va-vb;
+                double vsig  = getVsig(1.0,vab,rab);
+                qab = getViscosity(rhoa,vsig,vab,rab);
+                
+                // for particle b
+                rab = db/dbnorm;
+                vab = vb-va;
+                vsig = getVsig(1.0,vab,rab);
+                double qabb = getViscosity(rhob,vsig,vab,rab);
+
                 //grkerna = particleData->grkerns[i][j];
                 //grkernb = particleData->grkerns[j][i];
                 q = dx/ha;
@@ -64,7 +91,7 @@ void getAccel(int particles, struct arrays *particleData){
                 grada = sigma*grkerna*(1.0/(ha*ha))*(da/danorm);
                 gradb = sigma*grkernb*(1.0/(hb*hb))*(da/danorm);
                 massb = particleData->m[j];
-                a += -massb*((pressurea/(rhoa*rhoa))*grada + (pressureb/(rhob*rhob))*gradb);
+                a += -massb*(((pressurea+qab)/(rhoa*rhoa))*grada + ((pressureb+qabb)/(rhob*rhob))*gradb);
                 
                 //printf("j is: %d \n", j);
                 /*

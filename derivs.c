@@ -5,6 +5,7 @@
 #include "eos.h"
 #include "force.h"
 #include "ghosts.h"
+#include "smoothing.h"
     
 void derivs(int particles, struct arrays *particleData){
     double rho;
@@ -20,6 +21,9 @@ void derivs(int particles, struct arrays *particleData){
         particleData->rho[i+nopart] = particleData->rho[i];
         particleData->rho[i+nopart+nopart] = particleData->rho[i];
     }
+    // iterate smoothing after density call 
+    runSmoothing(particleData);
+
     // Call equation of state
     // This is a bit ugly but meets the requirements
     for (int i=0; i<nopart+noghost; i++){

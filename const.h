@@ -13,4 +13,8 @@
 #define dt  0.0001
 // output interval
 #define dtout 0.1
+// artifical viscosity parms
+#define alpha 1.0
+#define beta 2.0
+
 #endif //CONST_H

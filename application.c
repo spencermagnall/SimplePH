@@ -34,6 +34,7 @@ void application(){
     derivs(particles,&particleData);
     printf("Derivs passed. \n");
     writeOutput(particles, &particleData,0,t);
+    outputEnergy(particles, &particleData,0,t);
     printf("Write output passed \n");
     //exit(0);
     while (t < tmax){
@@ -44,6 +45,7 @@ void application(){
         }
         step(particles, &particleData);
         printf("Time is: %f \n", t);
+        outputEnergy(particles,&particleData,ifile,t);
         //double ke = getKinetic(particles,&particleData);
         //printf("Kinetic Energy: %f \n",ke);
         if (t > tprint){

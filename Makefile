@@ -1,7 +1,9 @@
 CC = gcc
 CFLAGS = -O3 -std=c18 -Wall
 #DEPS =
-SRCS = main.c kinetic.c step_leapfrog.c force.c eos_isothermal.c derivs.c ghosts.c kernel.c density.c output.c setup.c application.c
+#SETUP = setupsod.c
+SETUP = setup.c
+SRCS = main.c viscosity.c kinetic.c smoothing.c step_leapfrog.c force.c eos_isothermal.c derivs.c ghosts.c kernel.c density.c output.c ${SETUP} application.c
 OBJS = $(SRCS:.c=.o)
 MAIN = SPH
 
@@ -14,3 +16,4 @@ clean:
 	rm -f *.o $(MAIN)
 cleanruns:
 	rm -f snap_*
+	rm -f *.ev
