@@ -9,7 +9,9 @@
 #include "kinetic.h"
 #include "step.h"
 #include <stdlib.h>
+
 void application(){
+    printf("Entered Application \n");
     double t = 0.0;
     double tmax = 5.0;
     printf("Working Correctly\n");
@@ -36,7 +38,7 @@ void application(){
     writeOutput(particles, &particleData,0,t);
     outputEnergy(particles, &particleData,0,t);
     printf("Write output passed \n");
-    //exit(0);
+    exit(0);
     while (t < tmax){
         t += dt;
         for (int i=nopart; i<nopart+noghost; i++){
