@@ -61,19 +61,44 @@ void vOne(int particles, struct arrays *particleData, double oldA[]){
         particleData->v[i] = v1;
     }
 }
+void u(int particles, struct arrays *particleData){
+    double u;
+    double du;
+    for (int i=0; i<particles; i++){
+        u = particleData->u[i];
+        du = particleData->du[i];
+        u = u + du*dt;
+        particleData->u[i] = u;
+    }
 
+}
+void u1(int particles, struct arrays *particleData, double oldDU[]){
+    double u;
+    double du;
+
+    for (int i=0; i<particles; i++){
+        u = particleData->u[i];
+        du = particleData->du[i];
+
+        u = u + 0.5*dt*(du-oldDU[i]);
+        particleData->u[i] = u;
+    }
+}
 void step(int particles, struct arrays *particleData){
-    
     xOne(particles,particleData);
     vStar(particles,particleData);
     
+    //u(particles,particleData);
     // store old a
     double a0[particles];
+    double du0[particles];
     for (int i=0; i<particles; i++){
         a0[i] = particleData->a[i];
+        du0[i] = particleData->du[i];
     }
-    
+         
     derivs(particles,particleData);
+    //u1(particles,particleData,du0);
     vOne(particles, particleData, a0);
 
 }

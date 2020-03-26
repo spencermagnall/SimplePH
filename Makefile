@@ -1,9 +1,11 @@
 CC = gcc
-CFLAGS = -O3 -std=c18 -Wall -g -Wextra
+CFLAGS = -O3 -std=c18 -Wall -g -Wextra 
 #DEPS =
-SETUP = setup_sod.c
+EOS = eos_isothermal.c
+#EOS = eos_adiabatic.c
+SETUP = setup_sodiso.c
 #SETUP = setup.c
-SRCS = main.c viscosity.c kinetic.c smoothing.c step_leapfrog.c force.c eos_isothermal.c derivs.c ghosts.c kernel.c density.c output.c ${SETUP} application.c
+SRCS = main.c allocate.c viscosity.c kinetic.c smoothing.c step_leapfrog.c force.c ${EOS} derivs.c ghosts.c kernel.c density.c output.c ${SETUP} application.c
 OBJS = $(SRCS:.c=.o)
 MAIN = SPH
 

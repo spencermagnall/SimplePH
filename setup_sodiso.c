@@ -9,7 +9,7 @@ int setup(struct arrays *particleData){
     double rholeft = 1.0;
     double rhoright = 0.1;
     double dxleft = 0.001;
-    double dxright = 0.008;
+    double dxright = 0.01;
 
     // Not really necessary but lets make this explicit
     double mid1 = -1.0;
@@ -50,7 +50,7 @@ int setup(struct arrays *particleData){
         // A Real Particle
         particleData->exists[particleIndex] = true;
         // Set Mass
-        particleData->m[particleIndex] = 0.125*dxright; 
+        particleData->m[particleIndex] = rhoright*dxright; 
         particleData->u[particleIndex] = 2.0;
         // move to next particle
         x += dxright;
@@ -79,7 +79,7 @@ int setup(struct arrays *particleData){
         particleData->h[particleIndex] = 1.2*dxleft;
         // A Real Particle
         particleData->exists[particleIndex] = true;
-        particleData->m[particleIndex] = dxleft;
+        particleData->m[particleIndex] = rholeft*dxleft;
         particleData->u[particleIndex] = 2.5;
         // move to next particle
         x += dxleft;
@@ -106,7 +106,7 @@ int setup(struct arrays *particleData){
         particleData->h[particleIndex] = 1.2*dxleft;
         // A Real Particle
         particleData->exists[particleIndex] = true;
-        particleData->m[particleIndex] = dxleft;
+        particleData->m[particleIndex] = rholeft*dxleft;
         particleData->u[particleIndex] = 2.5;
         // move to next particle
         x += dxleft;
@@ -133,7 +133,7 @@ int setup(struct arrays *particleData){
         particleData->h[particleIndex] = 1.2*dxright;
         // A Real Particle
         particleData->exists[particleIndex] = true;
-        particleData->m[particleIndex] = 0.125*dxright;
+        particleData->m[particleIndex] = rhoright*dxright;
         particleData->u[particleIndex] = 2.0;
         // move to next particle
         x += dxright;

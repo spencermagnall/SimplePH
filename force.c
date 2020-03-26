@@ -41,7 +41,14 @@ void getAccel(int particles, struct arrays *particleData){
     double vab;
     double rab;
     double qab;
-    
+    double du;
+    int n;
+    double cs;
+    //if (isSod == 1){
+    //    n = particles;
+    //} else {
+        n = particles + noghost;
+    //}
 
 
     for (int i=0; i<particles; i++){
@@ -51,10 +58,11 @@ void getAccel(int particles, struct arrays *particleData){
         ha = particleData->h[i];
         xa = particleData->x[i];
         va = particleData->v[i];
+        du = 0.0; 
         // Should I store grkern or recalculate
         // Stored currently can be accesed in particleData
-        for (int j=0; j<particles+noghost; j++){
-             if (i != j){
+        for (int j=0; j<n; j++){
+             if (i != j && particleData->exists[j] == true){ 
                 xb = particleData->x[j];
                 vb = particleData->v[j];
                 da = xa-xb;
@@ -71,12 +79,14 @@ void getAccel(int particles, struct arrays *particleData){
                 // for particle a
                 rab = da/danorm;
                 vab = va-vb;
+                cs = particleData->cs[i];
                 double vsig  = getVsig(1.0,vab,rab);
                 qab = getViscosity(rhoa,vsig,vab,rab);
                 
                 // for particle b
                 rab = db/dbnorm;
                 vab = vb-va;
+                cs = particleData->cs[j];
                 vsig = getVsig(1.0,vab,rab);
                 double qabb = getViscosity(rhob,vsig,vab,rab);
 
@@ -92,8 +102,9 @@ void getAccel(int particles, struct arrays *particleData){
                 gradb = sigma*grkernb*(1.0/(hb*hb))*(da/danorm);
                 massb = particleData->m[j];
                 a += -massb*(((pressurea+qab)/(rhoa*rhoa))*grada + ((pressureb+qabb)/(rhob*rhob))*gradb);
-                
+                du = du +  massb*(((pressurea+qab)/(rhoa*rhoa))*(va-vb)*grkerna);  
                 //printf("j is: %d \n", j);
+               
                 /*
                 printf("acell: ");
                 printf("%f \n",a);
@@ -107,6 +118,7 @@ void getAccel(int particles, struct arrays *particleData){
 
         // store new accel
         particleData->a[i] = a;
+        particleData->du[i] = du;
     }
 
 }

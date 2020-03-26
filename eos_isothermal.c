@@ -1,6 +1,6 @@
 #include "eos.h"
 
-void equationOfState(double density, double *pressure, double *soundSpeed ){
+void equationOfState(double density, double *pressure, double *soundSpeed,double u, double gamma ){
     // sound speed is const
     // Move to consts ??
     double cs = 1.0;

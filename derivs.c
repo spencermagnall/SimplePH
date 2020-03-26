@@ -11,7 +11,11 @@ void derivs(int particles, struct arrays *particleData){
     double rho;
     double cs;
     double pressure;
-    
+   
+    for (int i=particles+1; i<noghost; i++){
+        particleData->exists[i] = false;
+
+    }
     // Set ghost particles
     setGhosts(particles,particleData);
     // Call density
@@ -26,12 +30,18 @@ void derivs(int particles, struct arrays *particleData){
 
     // Call equation of state
     // This is a bit ugly but meets the requirements
-    for (int i=0; i<nopart+noghost; i++){
+    for (int i=0; i<nopart; i++){
         rho = particleData->rho[i];
+        double u = particleData->u[i];
+        double gin = 1.4;
         // cs isn't used currently
-        equationOfState(rho, &pressure, &cs);
+        equationOfState(rho, &pressure, &cs,u,gin);
         particleData->P[i] = pressure;
+        particleData->cs[i] = cs;
+
     }
+    //setGhosts(particles,particleData);
+    //exit(0);
     // Call accel
     getAccel(particles,particleData);
 

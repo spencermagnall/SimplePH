@@ -1,6 +1,7 @@
 #ifndef EOS_H
 #define EOS_H
 
-void equationOfState(double density, double *pressure, double *soundspeed);
+struct arrays;
+void equationOfState(double density, double *pressure, double *soundspeed,double u, double gamma);
 
 #endif // EOS_H
