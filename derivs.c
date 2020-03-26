@@ -26,21 +26,24 @@ void derivs(int particles, struct arrays *particleData){
         particleData->rho[i+nopart+nopart] = particleData->rho[i];
     }
     // iterate smoothing after density call 
-    runSmoothing(particleData);
+    runSmoothing(particles,particleData);
 
     // Call equation of state
     // This is a bit ugly but meets the requirements
     for (int i=0; i<nopart; i++){
-        rho = particleData->rho[i];
-        double u = particleData->u[i];
-        double gin = 1.4;
-        // cs isn't used currently
-        equationOfState(rho, &pressure, &cs,u,gin);
-        particleData->P[i] = pressure;
-        particleData->cs[i] = cs;
-
+        if (particleData->exists[i]){
+        //printf("i=: %d \n",i);
+            rho = particleData->rho[i];
+            double u = particleData->u[i];
+            double gin = 1.4;
+            // cs isn't used currently
+            equationOfState(rho, &pressure, &cs,u,gin);
+            particleData->P[i] = pressure;
+            particleData->cs[i] = cs;
+        
+        }
     }
-    //setGhosts(particles,particleData);
+    setGhosts(particles,particleData);
     //exit(0);
     // Call accel
     getAccel(particles,particleData);

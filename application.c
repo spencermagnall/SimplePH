@@ -42,6 +42,7 @@ void application(){
     //getDensity(particles,&particleData);
     //printf("Density calc passed. \n");
     derivs(particles,&particleData);
+    //exit(0);
     printf("Derivs passed. \n");
     writeOutput(particles, &particleData,0,t);
     outputEnergy(particles, &particleData,0,t);

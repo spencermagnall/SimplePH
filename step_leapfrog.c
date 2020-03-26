@@ -1,6 +1,7 @@
 #include "step.h"
 #include "derivs.h"
 #include "arrays.h"
+#include "ghosts.h"
 #include "const.h"
 #include <stdio.h>
 #include <math.h>
@@ -40,7 +41,7 @@ void vStar(int particles, struct arrays *particleData){
     double vstar;
     double parta;
 
-    for (int i=0; i<particles; i++){
+    for (int i=0; i<particles+noghost; i++){
         partv = particleData->v[i];
         parta = particleData->a[i];
         vstar = partv + dt*parta;
@@ -86,19 +87,21 @@ void u1(int particles, struct arrays *particleData, double oldDU[]){
 }
 void step(int particles, struct arrays *particleData){
     xOne(particles,particleData);
+    // set x pos of ghosts again
+    setGhosts(particles,particleData);
     vStar(particles,particleData);
     
-    //u(particles,particleData);
+    u(particles,particleData);
     // store old a
-    double a0[particles];
-    double du0[particles];
+    double a0[particles+noghost];
+    double du0[particles+noghost];
     for (int i=0; i<particles; i++){
         a0[i] = particleData->a[i];
         du0[i] = particleData->du[i];
     }
          
     derivs(particles,particleData);
-    //u1(particles,particleData,du0);
+    u1(particles,particleData,du0);
     vOne(particles, particleData, a0);
 
 }

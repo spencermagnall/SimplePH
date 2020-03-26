@@ -1,6 +1,6 @@
 #include "smoothing.h"
 #include "arrays.h"
-
+#include "density.h"
 void getSmoothing(struct arrays *particleData){
     double hnew;
     double h;
@@ -18,8 +18,10 @@ void getSmoothing(struct arrays *particleData){
     }
 }
 
-void runSmoothing(struct arrays *particleData){
+void runSmoothing(int particles, struct arrays *particleData){
     getSmoothing(particleData);
+    getDensity(particles,particleData); 
     getSmoothing(particleData);
+    getDensity(particles,particleData);
     getSmoothing(particleData);
 }

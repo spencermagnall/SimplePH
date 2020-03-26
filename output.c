@@ -20,7 +20,7 @@ void writeOutput(int particles, struct arrays *particleData,int outputno,double 
     
     fprintf(fp,"x, vx, ax, density, pressure, u, dudt \n");
     fprintf(fp,"%f \n",time);
-    for (int i=0; i < particles+noghost; i++){
+    for (int i=0; i < particles; i++){
         printf("%d \n",i);
         double x = particleData->x[i];
         double v = particleData->v[i];
