@@ -2,7 +2,7 @@
 #define CONST_H
 
 // flag for sod options 
-#define isSod 1 
+//#define isSod 0 
 
 // Special values for Sod Shock Tube
 #define sod1 -0.5

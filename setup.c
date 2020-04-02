@@ -21,8 +21,7 @@ int setup(struct arrays *particleData){
     double start = 0.05;
     double end = xmax - start;
     double dx  = (xmax)/nopart;
-    //printf("dx: %f \n", dx);
-    //exit(0);
+    printf("dx: %f \n", dx);
     start = 0.5*dx;
     
     // NO!
