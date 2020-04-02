@@ -130,5 +130,19 @@ void getAccel(int particles, struct arrays *particleData){
         particleData->a[i] = a;
         particleData->du[i] = du;
     }
-
+    
+    // CFL
+    double min = 1.e10;
+    double current;
+    for (int i=0; i<particles; i++){
+        ha = particleData->h[i];
+        cs = particleData->cs[i];
+        current = 0.2*(ha/cs);
+        current < min ? (min=current) : (min);
+    }
+    // SLOPPY 
+    // IF ANYTHING BREAKS THIS IS WHY
+    // SHOULD JUST BE A REGULAR VARIABLE AT THIS POINT 
+    #undef dt
+    #define dt min
 }
