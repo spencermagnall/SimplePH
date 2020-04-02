@@ -6,6 +6,7 @@ EOS = eos_isothermal.c
 SETUPFILE = setup.c
 #SETUP = setup_sodiso.c
 OPT = -D isSod=0
+ARTVIS = -D artVis=0
 
 ifeq ($(SETUP), sodiso)
 SETUPFILE = setup_sodiso.c
@@ -19,6 +20,7 @@ EOS = eos_adiabatic.c
 OPT = -D isSod=1
 endif 
 
+OPT += $(ARTVIS) 
 CFLAGS += $(OPT)
 
 SRCS = main.c allocate.c viscosity.c kinetic.c smoothing.c step_leapfrog.c force.c ${EOS} derivs.c ghosts.c kernel.c density.c output.c ${SETUPFILE} application.c

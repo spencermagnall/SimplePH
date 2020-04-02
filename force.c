@@ -40,7 +40,8 @@ void getAccel(int particles, struct arrays *particleData){
     double vb;
     double vab;
     double rab;
-    double qab;
+    double qab = 0.0;
+    double qabb = 0.0;
     double du;
     int n;
     double cs;
@@ -80,15 +81,24 @@ void getAccel(int particles, struct arrays *particleData){
                 rab = da/danorm;
                 vab = va-vb;
                 cs = particleData->cs[i];
-                double vsig  = getVsig(cs,vab,rab);
-                qab = getViscosity(rhoa,vsig,vab,rab);
+               
+                // Shock capture if enabled 
+                if (artVis == 1){
+                    double vsig  = getVsig(cs,vab,rab);
+                    qab = getViscosity(rhoa,vsig,vab,rab);
+                }
+                
                 
                 // for particle b
                 rab = db/dbnorm;
                 vab = vb-va;
                 cs = particleData->cs[j];
-                vsig = getVsig(cs,vab,rab);
-                double qabb = getViscosity(rhob,vsig,vab,rab);
+                // shock capture if enabled
+                if (artVis == 1){
+                    double vsig = getVsig(cs,vab,rab);
+                    qabb = getViscosity(rhob,vsig,vab,rab);
+                }
+                
 
                 //grkerna = particleData->grkerns[i][j];
                 //grkernb = particleData->grkerns[j][i];
