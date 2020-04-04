@@ -39,11 +39,11 @@ int setup(struct arrays *particleData){
     // have to handle boundary conditions carefully with ghost particles
 
     while(x < xmax){
-       
+        
         particleNo+= 1;
         printf("Particle no: %d \n",particleNo);
         printf("%f \n", x);  
-        
+         
         // Check that we have not exceeded maxp
         if (particleNo  > nopart){
             printf("Need a larger MaxP!\n");
@@ -66,7 +66,7 @@ int setup(struct arrays *particleData){
         // A real particle
         particleData->exists[particleIndex] = true;
         // Move to next particle 
-        x+=dx;
+        x = 0.5*dx + (particleNo*dx);
         particleIndex++;
         
             
