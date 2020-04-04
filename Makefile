@@ -6,8 +6,8 @@ EOS = eos_isothermal.c
 SETUPFILE = setup.c
 #SETUP = setup_sodiso.c
 OPT = -D isSod=0
-ARTVIS = -D artVis=0
-ADTSMH = -D adapSmooth=0
+ARTVIS = -D artVis=1
+ADTSMH = -D adapSmooth=1
 
 ifeq ($(SETUP), sodiso)
 SETUPFILE = setup_sodiso.c
