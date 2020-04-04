@@ -11,23 +11,25 @@ void derivs(int particles, struct arrays *particleData){
     double rho;
     double cs;
     double pressure;
+    int ghosts;
    
     for (int i=particles+1; i<noghost; i++){
         particleData->exists[i] = false;
 
     }
     // Set ghost particles
-    setGhosts(particles,particleData);
+    ghosts = setGhosts(particles,particleData);
     // Call density
-    getDensity(particles, particleData);
-    // Copy rho from real particles to ghosts 
-    for (int i=0; i<particles; i++){
-        particleData->rho[i+nopart] = particleData->rho[i];
-        particleData->rho[i+nopart+nopart] = particleData->rho[i];
-    }
+    //exit(0);
+    getDensity(particles, ghosts, particleData);
+    // Copy rho from real particles to ghosts
+    // This should be cheap O(N) 
+    ghosts = setGhosts(particles, particleData);
     // iterate smoothing after density call 
-    runSmoothing(particles,particleData);
-
+    if (adapSmooth == 1){ 
+        runSmoothing(particles,ghosts,particleData);
+        ghosts = setGhosts(particles,particleData);
+    }
     // Call equation of state
     // This is a bit ugly but meets the requirements
     for (int i=0; i<nopart; i++){
@@ -43,10 +45,10 @@ void derivs(int particles, struct arrays *particleData){
         
         }
     }
-    setGhosts(particles,particleData);
+    ghosts = setGhosts(particles,particleData);
     //exit(0);
     // Call accel
-    getAccel(particles,particleData);
+    getAccel(particles,ghosts,particleData);
 
 
 }

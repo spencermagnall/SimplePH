@@ -11,7 +11,7 @@ double getVsig(double cs, double vab, double rab){
     return vsig;
 }
 
-void getAccel(int particles, struct arrays *particleData){
+void getAccel(int particles,int ghosts, struct arrays *particleData){
     double rhoa;
     double rhob;
     double pressurea;
@@ -48,7 +48,7 @@ void getAccel(int particles, struct arrays *particleData){
     //if (isSod == 1){
     //    n = particles;
     //} else {
-        n = particles + noghost;
+        n = particles + ghosts;
     //}
 
 
@@ -86,6 +86,8 @@ void getAccel(int particles, struct arrays *particleData){
                 if (artVis == 1){
                     double vsig  = getVsig(cs,vab,rab);
                     qab = getViscosity(rhoa,vsig,vab,rab);
+                } else {
+                    qab = 0.0;
                 }
                 
                 
@@ -97,6 +99,8 @@ void getAccel(int particles, struct arrays *particleData){
                 if (artVis == 1){
                     double vsig = getVsig(cs,vab,rab);
                     qabb = getViscosity(rhob,vsig,vab,rab);
+                } else {
+                    qabb = 0.0;
                 }
                 
 

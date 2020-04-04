@@ -1,14 +1,15 @@
 #include "smoothing.h"
 #include "arrays.h"
 #include "density.h"
-void getSmoothing(struct arrays *particleData){
+#include "ghosts.h"
+void getSmoothing(struct arrays *particleData,int ghosts){
     double hnew;
     double h;
     double hfac = 1.2;
     double partMass;
     double partRho;
 
-    for (int i=0; i<nopart+noghost; i++){
+    for (int i=0; i<nopart+ghosts; i++){
         partMass = particleData->m[i];
         partRho = particleData->rho[i];
         h = particleData->h[i];
@@ -18,10 +19,12 @@ void getSmoothing(struct arrays *particleData){
     }
 }
 
-void runSmoothing(int particles, struct arrays *particleData){
-    getSmoothing(particleData);
-    getDensity(particles,particleData); 
-    getSmoothing(particleData);
-    getDensity(particles,particleData);
-    getSmoothing(particleData);
+void runSmoothing(int particles,int ghosts, struct arrays *particleData){
+    getSmoothing(particleData,ghosts);
+    getDensity(particles,ghosts,particleData); 
+    ghosts = setGhosts(particles,particleData);
+    getSmoothing(particleData,ghosts);
+    getDensity(particles,ghosts,particleData);
+    ghosts = setGhosts(particles,particleData);
+    getSmoothing(particleData,ghosts);
 }

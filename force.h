@@ -2,6 +2,6 @@
 #define FORCE_H
 
 struct arrays;
-void getAccel(int particles,struct arrays *particleData);
+void getAccel(int particles,int ghosts,struct arrays *particleData);
 
 #endif // FORCE_H

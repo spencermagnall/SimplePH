@@ -35,12 +35,6 @@ void application(){
     printf("Particles Setup: %d \n",particles);
     printf("xmin %f \n",xmin);
     printf("xmax %f \n", xmax);
-    //exit(0);
-    // passes particles-1 since arrays start at 0
-    //setGhosts(particles,&particleData);
-    //printf("SetGhost passed. \n");
-    //getDensity(particles,&particleData);
-    //printf("Density calc passed. \n");
     derivs(particles,&particleData);
     //exit(0);
     printf("Derivs passed. \n");
@@ -57,8 +51,6 @@ void application(){
         step(particles, &particleData);
         printf("Time is: %f \n", t);
         outputEnergy(particles,&particleData,ifile,t);
-        //double ke = getKinetic(particles,&particleData);
-        //printf("Kinetic Energy: %f \n",ke);
         if (t > tprint){
             writeOutput(particles, &particleData,ifile,t);
             ifile += 1;

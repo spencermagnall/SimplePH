@@ -5,7 +5,7 @@
 #include <math.h>
 #include <stdio.h>
 
-void getDensity(int particles,struct arrays *particleData){
+void getDensity(int particles,int ghosts,struct arrays *particleData){
     double rho = 0.0;
     double wkern = 0.0;
     double grkern =0.0;
@@ -18,11 +18,8 @@ void getDensity(int particles,struct arrays *particleData){
     double Wab = 0.0;
     double partMass = 0.0;
     int n;
-    //if (isSod == 1){
-    //    n = particles;
-    //}else {
-        n = particles + noghost;
-    //}
+    n = particles + ghosts;
+    
     for (int i=0; i < nopart; i++){
         rho = 0.0;
         h = particleData->h[i];

@@ -2,6 +2,6 @@
 #define SMOOTHING_H
 
 struct arrays;
-void runSmoothing(int,struct arrays *particleData);
+void runSmoothing(int,int,struct arrays *particleData);
 
 #endif // SMOOTHING_H
