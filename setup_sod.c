@@ -26,12 +26,13 @@ int setup(struct arrays *particleData){
     int particleNo = 0;
     int particleIndex = 0;
     double x = xmin + 0.5*dxright;
-
+    int counter = 0;
     // L.H.S
 
     while (x<mid1){
 
         particleNo+=1;
+        counter++;
         printf("ParticleNo: %d \n",particleNo);
         // Check that we have not exceeded maxp
         if (particleNo > nopart){
@@ -53,15 +54,18 @@ int setup(struct arrays *particleData){
         particleData->m[particleIndex] = 0.125*dxright; 
         particleData->u[particleIndex] = 2.0;
         // move to next particle
-        x += dxright;
+        x = xmin + 0.5*dxright + (counter*dxright);
         particleIndex++;
 
     }
+    
+    counter = 0;
 
     x = mid1 + 0.5*dxleft;
     while (x <  sod1){
     
         particleNo+=1;
+        counter++;
         printf("Particle is: %d \n",particleNo);
         // Check that we have not exceeded maxp
         if (particleNo > nopart){
@@ -82,12 +86,13 @@ int setup(struct arrays *particleData){
         particleData->m[particleIndex] = dxleft;
         particleData->u[particleIndex] = 2.5;
         // move to next particle
-        x += dxleft;
+        x = 0.5*dxleft + mid1 + (counter*dxleft);
         particleIndex++;
     }
+    counter = 0;
     x = startleft;
     while (x <  mid2){
-    
+        counter++;
         particleNo+=1;
         printf("Particle is: %d \n",particleNo);
         // Check that we have not exceeded maxp
@@ -109,12 +114,14 @@ int setup(struct arrays *particleData){
         particleData->m[particleIndex] = dxleft;
         particleData->u[particleIndex] = 2.5;
         // move to next particle
-        x += dxleft;
+        x = startleft + (dxleft*counter);
         particleIndex++;
     }
+    counter = 0;
     x = startright;
-    while (x <  xmax){
+    while (x <  xmax ){
     
+        counter++;
         particleNo+=1;
         printf("Particle is: %d \n",particleNo);
         // Check that we have not exceeded maxp
@@ -136,10 +143,10 @@ int setup(struct arrays *particleData){
         particleData->m[particleIndex] = 0.125*dxright;
         particleData->u[particleIndex] = 2.0;
         // move to next particle
-        x += dxright;
+        x = startright +  (dxright*counter);
         particleIndex++;
     }
-
+    
 
     return particleNo;
 

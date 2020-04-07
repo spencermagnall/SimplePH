@@ -12,13 +12,13 @@ ADTSMH = -D adapSmooth=1
 ifeq ($(SETUP), sodiso)
 SETUPFILE = setup_sodiso.c
 EOS = eos_isothermal.c
-OPT = -D isSod=1
+OPT = -D isSod=1 -D spcleft=0.001 -D spcright=0.01
 endif
 
 ifeq ($(SETUP), sod)
 SETUPFILE = setup_sod.c
 EOS = eos_adiabatic.c
-OPT = -D isSod=1
+OPT = -D isSod=1 -D spcleft=0.001 -D spcright=0.008
 endif 
 
 OPT += $(ARTVIS) 

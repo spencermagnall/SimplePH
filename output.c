@@ -18,12 +18,12 @@ void writeOutput(int particles, struct arrays *particleData,int outputno,double 
     fp = fopen(snap,"w+");
     
     
-    fprintf(fp,"x, vx, ax, density, pressure, u, dudt \n");
+    fprintf(fp,"x, vx, ax, density, pressure, u, dudt, m \n");
     fprintf(fp,"%f \n",time);
-    for (int i=0; i < particles+noghost; i++){
+    for (int i=0; i < particles; i++){
         
         if (particleData->exists[i]){
-            printf("%d \n",i);
+            //printf("%d \n",i);
             double x = particleData->x[i];
             double v = particleData->v[i];
             double a = particleData->a[i];
@@ -31,8 +31,9 @@ void writeOutput(int particles, struct arrays *particleData,int outputno,double 
             double P = particleData->P[i];
             double u = particleData->u[i];
             double dudt = particleData->du[i];
+            double m = particleData->m[i];
 
-            fprintf(fp,"%e  %e  %e  %e  %e  %e  %e  \n", x, v,a,rho,P,u,dudt);
+            fprintf(fp,"%e  %e  %e  %e  %e  %e  %e  %e  \n", x, v,a,rho,P,u,dudt,m);
     
         }
     }

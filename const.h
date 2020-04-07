@@ -9,7 +9,7 @@
 #define sod2  0.5
 
 // artifical viscosity parms
-#define alpha 1.0
+#define alpha 0.0
 #define beta 2.0
 
 #if isSod == 0

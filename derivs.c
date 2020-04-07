@@ -6,29 +6,32 @@
 #include "force.h"
 #include "ghosts.h"
 #include "smoothing.h"
-    
+#include "output.h" 
 void derivs(int particles, struct arrays *particleData){
     double rho;
     double cs;
     double pressure;
     int ghosts;
    
-    for (int i=particles+1; i<noghost; i++){
-        particleData->exists[i] = false;
-
-    }
     // Set ghost particles
     ghosts = setGhosts(particles,particleData);
     // Call density
     //exit(0);
     getDensity(particles, ghosts, particleData);
+    //printf("Particles: %d \n",particles);
+    //printf("Ghosts: %d \n",ghosts);
+    //exit(0);
+    //writeOutput(particles,particleData,-1,0.0);
+    //exit(0);
     // Copy rho from real particles to ghosts
     // This should be cheap O(N) 
     ghosts = setGhosts(particles, particleData);
+    
     // iterate smoothing after density call 
     if (adapSmooth == 1){ 
         runSmoothing(particles,ghosts,particleData);
         ghosts = setGhosts(particles,particleData);
+        
     }
     // Call equation of state
     // This is a bit ugly but meets the requirements
@@ -45,7 +48,9 @@ void derivs(int particles, struct arrays *particleData){
         
         }
     }
+    
     ghosts = setGhosts(particles,particleData);
+    
     //exit(0);
     // Call accel
     getAccel(particles,ghosts,particleData);
