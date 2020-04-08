@@ -11,7 +11,8 @@ double getVsig(double cs, double vab, double rab){
     return vsig;
 }
 
-void getAccel(int particles,int ghosts, struct arrays *particleData){
+double getAccel(int particles,int ghosts, struct arrays *particleData){
+    double dtnew;
     double rhoa;
     double rhob;
     double pressurea;
@@ -147,6 +148,8 @@ void getAccel(int particles,int ghosts, struct arrays *particleData){
     // SLOPPY 
     // IF ANYTHING BREAKS THIS IS WHY
     // SHOULD JUST BE A REGULAR VARIABLE AT THIS POINT 
-    #undef dt
-    #define dt min
+    //#undef dt
+    dtnew = min;
+     
+    return dtnew;
 }

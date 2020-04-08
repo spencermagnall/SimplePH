@@ -2,6 +2,7 @@
 #define STEP_H
 
 struct arrays;
-void step(int particles, struct arrays *particleData);
+//returns new dt
+double step(int particles, struct arrays *particleData,double dt);
 
 #endif // STEP_H

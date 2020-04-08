@@ -5,7 +5,7 @@
 #include "const.h"
 #include <stdio.h>
 #include <math.h>
-void xOne(int particles, struct arrays *particleData){
+void xOne(int particles, struct arrays *particleData,double dt){
      double partx;
      double partv;
      double parta;
@@ -36,7 +36,7 @@ void xOne(int particles, struct arrays *particleData){
     
 }
 
-void vStar(int particles, struct arrays *particleData){
+void vStar(int particles, struct arrays *particleData,double dt){
     double partv;
     double vstar;
     double parta;
@@ -50,7 +50,7 @@ void vStar(int particles, struct arrays *particleData){
 
 }
 // copying array is a little sloppy 
-void vOne(int particles, struct arrays *particleData, double oldA[]){
+void vOne(int particles, struct arrays *particleData, double oldA[], double dt){
     double vstar;
     double v1;
     double parta;
@@ -62,7 +62,7 @@ void vOne(int particles, struct arrays *particleData, double oldA[]){
         particleData->v[i] = v1;
     }
 }
-void u(int particles, struct arrays *particleData){
+void u(int particles, struct arrays *particleData,double dt){
     double u;
     double du;
     for (int i=0; i<particles; i++){
@@ -73,7 +73,7 @@ void u(int particles, struct arrays *particleData){
     }
 
 }
-void u1(int particles, struct arrays *particleData, double oldDU[]){
+void u1(int particles, struct arrays *particleData, double oldDU[],double dt){
     double u;
     double du;
 
@@ -85,13 +85,14 @@ void u1(int particles, struct arrays *particleData, double oldDU[]){
         particleData->u[i] = u;
     }
 }
-void step(int particles, struct arrays *particleData){
-    xOne(particles,particleData);
+double step(int particles, struct arrays *particleData,double dt){
+    double dtnew;
+    xOne(particles,particleData,dt);
     // set x pos of ghosts again
     setGhosts(particles,particleData);
-    vStar(particles,particleData);
+    vStar(particles,particleData,dt);
     
-    u(particles,particleData);
+    u(particles,particleData,dt);
     // store old a
     double a0[particles+noghost];
     double du0[particles+noghost];
@@ -100,9 +101,10 @@ void step(int particles, struct arrays *particleData){
         du0[i] = particleData->du[i];
     }
          
-    derivs(particles,particleData);
-    u1(particles,particleData,du0);
-    vOne(particles, particleData, a0);
+    dtnew = derivs(particles,particleData);
+    u1(particles,particleData,du0,dt);
+    vOne(particles, particleData, a0,dt);
+    return dtnew;
 
 }
 

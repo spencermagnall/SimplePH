@@ -15,7 +15,8 @@
 void application(){
     printf("Entered Application \n");
     double t = 0.0;
-    double tmax = 5.0;
+    //double tmax = 5.0;
+    double dt = 0.0001;
     printf("Working Correctly\n");
     printf("xmin: %f \n",xmin);
     printf("xmax: %f \n",xmax);
@@ -35,7 +36,8 @@ void application(){
     printf("Particles Setup: %d \n",particles);
     printf("xmin %f \n",xmin);
     printf("xmax %f \n", xmax);
-    derivs(particles,&particleData);
+    dt = derivs(particles,&particleData);
+    printf("dt %f \n",dt);
     //exit(0);
     printf("Derivs passed. \n");
     writeOutput(particles, &particleData,0,t);
@@ -48,7 +50,7 @@ void application(){
             particleData.exists[i] = false;
 
         }
-        step(particles, &particleData);
+        dt = step(particles, &particleData,dt);
         printf("Time is: %f \n", t);
         outputEnergy(particles,&particleData,ifile,t);
         if (t > tprint){

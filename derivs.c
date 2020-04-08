@@ -7,10 +7,11 @@
 #include "ghosts.h"
 #include "smoothing.h"
 #include "output.h" 
-void derivs(int particles, struct arrays *particleData){
+double  derivs(int particles, struct arrays *particleData){
     double rho;
     double cs;
     double pressure;
+    double dtnew;
     int ghosts;
    
     // Set ghost particles
@@ -53,7 +54,7 @@ void derivs(int particles, struct arrays *particleData){
     
     //exit(0);
     // Call accel
-    getAccel(particles,ghosts,particleData);
-
+    dtnew = getAccel(particles,ghosts,particleData);
+    return dtnew;
 
 }
