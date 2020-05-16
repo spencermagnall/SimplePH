@@ -24,10 +24,7 @@ void getDensity(int particles,int ghosts,struct arrays *particleData){
         rho = 0.0;
         h = particleData->h[i];
         ra = particleData->x[i];
-        //printf("i is: %d \n",i);
-        for (int j=0; j < n+1; j++){
-            //if (particleData->exists[j] == true) {
-                //printf("j is: %d \n",j);
+        for (int j=0; j < n; j++){
                 partMass = particleData->m[j];
                 rb = particleData->x[j];
                 dx = fabs(ra-rb);
@@ -49,13 +46,9 @@ void getDensity(int particles,int ghosts,struct arrays *particleData){
                 printf("cnormh: ");
                 printf("%f \n",cnormh);
                 */
+                
                 Wab = (Cnorm/h)*wkern;
-                //printf("Wab: ");
-                //printf("%f \n", Wab);
                 rho += partMass*Wab;
-                ///printf("rho: ");
-                //printf("%f \n", rho);
-            //}
             
         }
         particleData->rho[i] = rho;

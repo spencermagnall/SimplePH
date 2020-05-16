@@ -19,9 +19,7 @@ int setup(struct arrays *particleData){
     //#define xmax sod2
 
     double startleft = sod1 + 0.5*dxleft;
-    double endleft = mid2-0.5*dxleft;
     double startright = mid2 + 0.5*dxright;
-    double endright = sod2 - 0.5*dxright;
 
     int particleNo = 0;
     int particleIndex = 0;

@@ -17,13 +17,7 @@ double  derivs(int particles, struct arrays *particleData){
     // Set ghost particles
     ghosts = setGhosts(particles,particleData);
     // Call density
-    //exit(0);
     getDensity(particles, ghosts, particleData);
-    //printf("Particles: %d \n",particles);
-    //printf("Ghosts: %d \n",ghosts);
-    //exit(0);
-    //writeOutput(particles,particleData,-1,0.0);
-    //exit(0);
     // Copy rho from real particles to ghosts
     // This should be cheap O(N) 
     ghosts = setGhosts(particles, particleData);
@@ -52,7 +46,6 @@ double  derivs(int particles, struct arrays *particleData){
     
     ghosts = setGhosts(particles,particleData);
     
-    //exit(0);
     // Call accel
     dtnew = getAccel(particles,ghosts,particleData);
     return dtnew;

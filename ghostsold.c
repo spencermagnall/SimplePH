@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//  OLD NAIVE GHOSTS ROUTINE
+
 void setGhosts(int particles, struct arrays *particleData){
     double range = xmax - xmin;
     for (int i=0; i<particles; i++){

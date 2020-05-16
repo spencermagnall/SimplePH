@@ -6,8 +6,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 int setup(struct arrays *particleData){
-    double rholeft = 1.0;
-    double rhoright = 0.1;
     double dxleft = 0.001;
     double dxright = 0.008;
 
@@ -19,14 +17,13 @@ int setup(struct arrays *particleData){
     //#define xmax sod2
 
     double startleft = sod1 + 0.5*dxleft;
-    double endleft = mid2-0.5*dxleft;
     double startright = mid2 + 0.5*dxright;
-    double endright = sod2 - 0.5*dxright;
 
     int particleNo = 0;
     int particleIndex = 0;
     double x = xmin + 0.5*dxright;
     int counter = 0;
+    
     // L.H.S
 
     while (x<mid1){

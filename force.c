@@ -46,11 +46,7 @@ double getAccel(int particles,int ghosts, struct arrays *particleData){
     double du;
     int n;
     double cs;
-    //if (isSod == 1){
-    //    n = particles;
-    //} else {
-        n = particles + ghosts;
-    //}
+    n = particles + ghosts;
 
 
     for (int i=0; i<particles; i++){
@@ -61,8 +57,6 @@ double getAccel(int particles,int ghosts, struct arrays *particleData){
         xa = particleData->x[i];
         va = particleData->v[i];
         du = 0.0; 
-        // Should I store grkern or recalculate
-        // Stored currently can be accesed in particleData
         for (int j=0; j<n; j++){
              if (i != j && particleData->exists[j] == true){ 
                 xb = particleData->x[j];
@@ -109,7 +103,6 @@ double getAccel(int particles,int ghosts, struct arrays *particleData){
                 //grkernb = particleData->grkerns[j][i];
                 q = dx/ha;
                 getKernel(q,&wkern,&grkerna);
-                //dx = fabs(xb-xa);
                 q = dx/hb;
                 getKernel(q,&wkern,&grkernb);
 
@@ -118,7 +111,6 @@ double getAccel(int particles,int ghosts, struct arrays *particleData){
                 massb = particleData->m[j];
                 a += -massb*(((pressurea+qab)/(rhoa*rhoa))*grada + ((pressureb+qabb)/(rhob*rhob))*gradb);
                 du +=  massb*(((pressurea+qab)/(rhoa*rhoa))*(va-vb)*grada);  
-                //printf("j is: %d \n", j);
                
                 /*
                 printf("acell: ");
@@ -145,10 +137,6 @@ double getAccel(int particles,int ghosts, struct arrays *particleData){
         current = 0.2*(ha/cs);
         current < min ? (min=current) : (min);
     }
-    // SLOPPY 
-    // IF ANYTHING BREAKS THIS IS WHY
-    // SHOULD JUST BE A REGULAR VARIABLE AT THIS POINT 
-    //#undef dt
     dtnew = min;
      
     return dtnew;

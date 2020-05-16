@@ -23,7 +23,6 @@ void writeOutput(int particles, struct arrays *particleData,int outputno,double 
     for (int i=0; i < particles; i++){
         
         if (particleData->exists[i]){
-            //printf("%d \n",i);
             double x = particleData->x[i];
             double v = particleData->v[i];
             double a = particleData->a[i];

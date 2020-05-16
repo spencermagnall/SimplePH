@@ -17,16 +17,10 @@ void xOne(int particles, struct arrays *particleData,double dt){
          parta = particleData->a[i];
          x1 = partx + dt*partv + 0.5*(dt*dt)*parta;
          // handle periodic boundary
-         double deltaf = fabs(x1-xmax);
          if (x1 > xmax){
-             printf("Moved Max! \n");
-             printf("x1: %e \n",x1);
-             printf("xmax: %e \n", xmax);
              double deltax = x1-xmax;
-             printf("deltax: %e  \n",deltax);
              x1 = xmin + deltax;
          } else if (x1 < xmin){
-             printf("Moved Min! \n");
              double deltax = fabs(x1-xmin);
              x1 = xmax - deltax;
          }

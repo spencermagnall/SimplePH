@@ -4,8 +4,6 @@
 // flag for sod options 
 //#define isSod 0 
 
-// fixed timestepping
-#define fixedstep 1
 // Special values for Sod Shock Tube
 #define sod1 -0.5
 #define sod2  0.5

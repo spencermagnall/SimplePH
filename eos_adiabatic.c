@@ -6,6 +6,5 @@ void equationOfState(double density, double *pressure, double *soundspeed,double
     double gammaMinus = gamma - 1.0;
     *pressure = gammaMinus * density * u;    
     *soundspeed = sqrt(gamma*(*pressure/density));
-    //printf("SoundSpeed %e \n",*soundspeed);
 } 
 

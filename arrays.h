@@ -6,12 +6,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-//int arraysize = nopart+noghost;
 
 struct arrays
 {
     double *x, *v, *a, *m, *h, *rho, *u,*du,*P, *cs;
-    //
     bool *exists;
 
     // Store the gradient of the kernel function
