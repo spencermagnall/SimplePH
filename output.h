@@ -1,6 +1,6 @@
 #ifndef OUTPUT_H
 #define OUTPUT_H
-struct arrays;
-void writeOutput(int,struct arrays *theArrays,int,double);
-void outputEnergy(int,struct arrays *theArrays,int,double);
+struct particledata;
+void writeOutput(int,struct particledata *theArrays,int,double);
+void outputEnergy(int,struct particledata *theArrays,int,double);
 #endif //OUTPUT_H

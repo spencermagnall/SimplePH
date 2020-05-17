@@ -9,7 +9,7 @@
 #include "derivs.h"
 #include "kinetic.h"
 #include "step.h"
-
+#include "particledata.h"
 #include <stdlib.h>
 
 void application(){
@@ -21,40 +21,41 @@ void application(){
     printf("xmin: %f \n",xmin);
     printf("xmax: %f \n",xmax);
     printf("IsSod: %d \n", isSod);
-    struct arrays particleData;
     int ifile = 1;
     double tprint = (double)ifile*dtout;
     
-    allocate(&particleData);
+    allocate();
     // This would be easy in c++ 
     for (int i=0; i < nopart+noghost; i++){
         printf("i = %d \n",i);
-        particleData.exists[i] = false;
+        P[i].exists = false;
     }
     printf("Particles exist! \n");
-    int particles = setup(&particleData);
+    int particles = setup(P);
     printf("Particles Setup: %d \n",particles);
     printf("xmin %f \n",xmin);
     printf("xmax %f \n", xmax);
-    dt = derivs(particles,&particleData);
+    writeOutput(particles,P,0,t);
+    exit(0);
+    //dt = derivs(particles,&particleData);
     printf("dt %f \n",dt);
     //exit(0);
     printf("Derivs passed. \n");
-    writeOutput(particles, &particleData,0,t);
-    outputEnergy(particles, &particleData,0,t);
+    //writeOutput(particles, &particleData,0,t);
+    //outputEnergy(particles, &particleData,0,t);
     printf("Write output passed \n");
     //exit(0);
     while (t < tmax){
         t += dt;
         for (int i=nopart; i<nopart+noghost; i++){
-            particleData.exists[i] = false;
+            P[i].exists = false;
 
         }
-        dt = step(particles, &particleData,dt);
+        //dt = step(particles, &particleData,dt);
         printf("Time is: %f \n", t);
-        outputEnergy(particles,&particleData,ifile,t);
+        //outputEnergy(particles,&particleData,ifile,t);
         if (t > tprint){
-            writeOutput(particles, &particleData,ifile,t);
+            //writeOutput(particles, &particleData,ifile,t);
             ifile += 1;
             tprint = (double) ifile*dtout;
             //exit(0);

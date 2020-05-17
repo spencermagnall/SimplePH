@@ -1,11 +1,11 @@
 #include "setup.h"
-#include "arrays.h"
 #include "const.h"
+#include "particledata.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-int setup(struct arrays *particleData){
+int setup(struct particledata *particleData){
     double rholeft = 1.0;
     double rhoright = 0.1;
     double dxleft = 0.001;
@@ -38,18 +38,18 @@ int setup(struct arrays *particleData){
         }
         
         // Set Particle Position
-        particleData->x[particleIndex] = x;
+        particleData[particleIndex].x[0] = x;
 
         // velocity is 0
-        particleData->v[particleIndex] = 0.0;
+        particleData[particleIndex].v[0] = 0.0;
 
         // Set Smoothing Link
-        particleData->h[particleIndex] = 1.2*dxright;
+        particleData[particleIndex].h = 1.2*dxright;
         // A Real Particle
-        particleData->exists[particleIndex] = true;
+        particleData[particleIndex].exists = true;
         // Set Mass
-        particleData->m[particleIndex] = rhoright*dxright; 
-        particleData->u[particleIndex] = 2.0;
+        particleData[particleIndex].m = rhoright*dxright; 
+        particleData[particleIndex].u = 2.0;
         // move to next particle
         x += dxright;
         particleIndex++;
@@ -68,17 +68,17 @@ int setup(struct arrays *particleData){
         }
         
         // Set Particle Position
-        particleData->x[particleIndex] = x;
+        particleData[particleIndex].x[0] = x;
 
         // velocity is 0
-        particleData->v[particleIndex] = 0.0;
+        particleData[particleIndex].v[0] = 0.0;
 
         // Set Smoothing Link
-        particleData->h[particleIndex] = 1.2*dxleft;
+        particleData[particleIndex].h = 1.2*dxleft;
         // A Real Particle
-        particleData->exists[particleIndex] = true;
-        particleData->m[particleIndex] = rholeft*dxleft;
-        particleData->u[particleIndex] = 2.5;
+        particleData[particleIndex].exists = true;
+        particleData[particleIndex].m = rholeft*dxleft;
+        particleData[particleIndex].u = 2.5;
         // move to next particle
         x += dxleft;
         particleIndex++;
@@ -95,17 +95,17 @@ int setup(struct arrays *particleData){
         }
         
         // Set Particle Position
-        particleData->x[particleIndex] = x;
+        particleData[particleIndex].x[0] = x;
 
         // velocity is 0
-        particleData->v[particleIndex] = 0.0;
+        particleData[particleIndex].v[0] = 0.0;
 
         // Set Smoothing Link
-        particleData->h[particleIndex] = 1.2*dxleft;
+        particleData[particleIndex].h = 1.2*dxleft;
         // A Real Particle
-        particleData->exists[particleIndex] = true;
-        particleData->m[particleIndex] = rholeft*dxleft;
-        particleData->u[particleIndex] = 2.5;
+        particleData[particleIndex].exists = true;
+        particleData[particleIndex].m = rholeft*dxleft;
+        particleData[particleIndex].u = 2.5;
         // move to next particle
         x += dxleft;
         particleIndex++;
@@ -122,17 +122,17 @@ int setup(struct arrays *particleData){
         }
         
         // Set Particle Position
-        particleData->x[particleIndex] = x;
+        particleData[particleIndex].x[0] = x;
 
         // velocity is 0
-        particleData->v[particleIndex] = 0.0;
+        particleData[particleIndex].v[0] = 0.0;
 
         // Set Smoothing Link
-        particleData->h[particleIndex] = 1.2*dxright;
+        particleData[particleIndex].h = 1.2*dxright;
         // A Real Particle
-        particleData->exists[particleIndex] = true;
-        particleData->m[particleIndex] = rhoright*dxright;
-        particleData->u[particleIndex] = 2.0;
+        particleData[particleIndex].exists = true;
+        particleData[particleIndex].m = rhoright*dxright;
+        particleData[particleIndex].u = 2.0;
         // move to next particle
         x += dxright;
         particleIndex++;

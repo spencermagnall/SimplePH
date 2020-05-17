@@ -3,9 +3,10 @@
 #include "kinetic.h"
 #include <stdio.h>
 #include <string.h>
+#include "particledata.h"
 #define STRINGSIZE 40
 
-void writeOutput(int particles, struct arrays *particleData,int outputno,double time){
+void writeOutput(int particles, struct particledata *particleData,int outputno,double time){
     FILE *fp;
     
     
@@ -22,32 +23,32 @@ void writeOutput(int particles, struct arrays *particleData,int outputno,double 
     fprintf(fp,"%f \n",time);
     for (int i=0; i < particles; i++){
         
-        if (particleData->exists[i]){
-            double x = particleData->x[i];
-            double v = particleData->v[i];
-            double a = particleData->a[i];
-            double rho = particleData->rho[i];
-            double P = particleData->P[i];
-            double u = particleData->u[i];
-            double dudt = particleData->du[i];
-            double m = particleData->m[i];
+        if (particleData[i].exists){
+            double x = particleData[i].x[0];
+            double v = particleData[i].v[0];
+            double a = particleData[i].a[0];
+            double rho = particleData[i].rho;
+            double P = particleData[i].Pressure;
+            double u = particleData[i].u;
+            double m = particleData[i].m;
 
-            fprintf(fp,"%e  %e  %e  %e  %e  %e  %e  %e  \n", x, v,a,rho,P,u,dudt,m);
+            fprintf(fp,"%e  %e  %e  %e  %e  %e  %e  \n", x, v,a,rho,P,u,m);
     
         }
     }
     fclose(fp);
 }
 
-void outputEnergy(int particles,struct arrays *particleData,int outputno,double time){
+void outputEnergy(int particles,struct particledata *particleData,int outputno,double time){
     FILE *fpev;
 
     // Get the total Kinetic Energy
-    double ke = getKinetic(particles,particleData);
+    // TODO FIX THIS 
+    //double ke = getKinetic(particles,particleData);
     fpev = fopen("energy.ev","a");
     if (outputno == 0){
         fprintf(fpev, "t   ke \n");
     }
-    fprintf(fpev,"%e  %e \n",time,ke);
+    //fprintf(fpev,"%e  %e \n",time,ke);
     fclose(fpev);
 }

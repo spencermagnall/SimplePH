@@ -5,8 +5,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-
-int setup(struct arrays *particleData){
+#include "particledata.h"
+int setup(struct particledata *particleData){
     // SETUP PARTICLES
     //double xmin = 0.0;
     //double xmax = 1.0;
@@ -38,17 +38,17 @@ int setup(struct arrays *particleData){
         
         
         // Set Particle Position
-        particleData->x[particleIndex] = x;
+        particleData[particleIndex].x[0] = x;
         // Set Mass
         // particleData->m[i] = drho;
         // Have to set mass later 
 
         // Set Velocity
-        particleData->v[particleIndex] = cs*1.e-4*sin(2*M_PI*x);
+        particleData[particleIndex].v[0] = cs*1.e-4*sin(2*M_PI*x);
         // Set Smoothing Link
-        particleData->h[particleIndex] = 1.2*dx;
+        particleData[particleIndex].h = 1.2*dx;
         // A real particle
-        particleData->exists[particleIndex] = true;
+        particleData[particleIndex].exists = true;
         // Move to next particle 
         x = 0.5*dx + (particleNo*dx);
         particleIndex++;
@@ -59,7 +59,7 @@ int setup(struct arrays *particleData){
     // setup mass distribution
     double mpart = rho0*dx;
     for (int i=0; i < particleIndex ; i++){
-        particleData->m[i] = mpart;
+        particleData[i].m = mpart;
         printf("index is: %d \n ",i);
     }
     return particleNo;

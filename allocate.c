@@ -1,9 +1,11 @@
 #include "allocate.h"
 #include "arrays.h"
 #include "const.h"
+#include "particledata.h"
 
 int arraysize = nopart + noghost;
 
+/*
 void allocate(struct arrays *particleData){
     particleData->x = malloc(arraysize * sizeof(double));
     particleData->v = malloc(arraysize * sizeof(double));
@@ -17,4 +19,9 @@ void allocate(struct arrays *particleData){
     particleData->exists = malloc(arraysize * sizeof(bool));
     particleData->grkerns = malloc(arraysize * sizeof(double)); 
     particleData->du = malloc(arraysize*sizeof(double));
+}
+*/
+
+void allocate(void){
+   P = malloc(arraysize *sizeof(struct particledata)); 
 }

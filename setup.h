@@ -1,7 +1,7 @@
 #ifndef SETUP_H
 #define SETUP_H
 
-struct arrays;
-int setup(struct arrays *theArrays);
+struct particledata;
+int setup(struct particledata *theData);
 
 #endif //SETUP_H
