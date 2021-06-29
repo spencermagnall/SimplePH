@@ -11,13 +11,16 @@ After Cloning the Repository, the inital conditions are selected at compile time
 
 #### Standing Wave
 Typing "make" with no SETUP options will compile the code for running a simulation of a standing wave. The code can then be executed with "./SPH
-", and will dump particle information (position, velocity, etc.) every dtout units.
+", and will dump particle information (position, velocity, etc.) every dtout units. The code will also output an .ev file which contains the evolution of the total energy as a function of time. 
 
 #### Isothermal Shocktube
 Providing "SETUP=sodiso" at compile time will compile the code for an isothermal shocktube
 
 #### Adibatic Shocktube
-Providing "SETUP=sod" at compile time will compile the code for an adibatic shock tube with adibatic index of 
+Providing "SETUP=sod" at compile time will compile the code for an adibatic shock tube with adibatic index of . 
+
+### Altering parameters
+Parameters for the code such as number of particles, output, artificial viscosity parameters, etc. are defined in the const.h header. These parameters may be freely changed (e.g changing the number of particles to increase the resolution of the simulation), but also may produce unphysicial results, or break the code entirely. 
 
 
 
