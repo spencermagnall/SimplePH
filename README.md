@@ -14,17 +14,15 @@ Typing "make" with no SETUP options will compile the code for running a simulati
 ", and will dump particle information (position, velocity, etc.) every dtout units. The code will also output an .ev file which contains the evolution of the total energy as a function of time. 
 
 #### Isothermal Shocktube
-Providing "SETUP=sodiso" at compile time will compile the code for an isothermal shocktube
+Providing "SETUP=sodiso" at compile time will compile the code for an isothermal shocktube with density of 1.0 for x < 0, and 0.1 for x > 0. 
 
 #### Adibatic Shocktube
-Providing "SETUP=sod" at compile time will compile the code for an adibatic shock tube with adibatic index of . 
+Providing "SETUP=sod" at compile time will compile the code for an adibatic shock tube with adibatic index of gamma = 1.4, with inital pressure and density of 1 for x < 0, and an inital pressure and density of 0.1 and 0.125 respectively for x >= 0.  
 
 ### Altering parameters
 Parameters for the code such as number of particles, output, artificial viscosity parameters, etc. are defined in the const.h header. These parameters may be freely changed (e.g changing the number of particles to increase the resolution of the simulation), but also may produce unphysicial results, or break the code entirely. 
 
-
-
 ## Visulisation of Results
-Dump files for a completed simulation are in a ascii format with the prefix "snap_" and can be visuallised using the plotting software of your choice. However, I recommend using SPLASH, which can be downloaded from https://users.monash.edu.au/~dprice/splash/. SPLASH has many useful features 
+Dump files for a completed simulation are in a ascii format with the prefix "snap_" and can be visuallised using the plotting software of your choice. However, I recommend using SPLASH, which can be downloaded from https://users.monash.edu.au/~dprice/splash/. SPLASH has many useful features, however the one we are most interested in is the exact solutions. For your convenience I have included splash files, that will setup plotting with exact solutions for the specified problem. 
 
 ## Acknowledgments
