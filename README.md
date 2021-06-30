@@ -23,6 +23,7 @@ Providing "SETUP=sod" at compile time will compile the code for an adibatic shoc
 Parameters for the code such as number of particles, output, artificial viscosity parameters, etc. are defined in the const.h header. These parameters may be freely changed (e.g changing the number of particles to increase the resolution of the simulation), but also may produce unphysicial results, or break the code entirely. 
 
 ## Visulisation of Results
-Dump files for a completed simulation are in a ascii format with the prefix "snap_" and can be visuallised using the plotting software of your choice. However, I recommend using SPLASH, which can be downloaded from https://users.monash.edu.au/~dprice/splash/. SPLASH has many useful features, however the one we are most interested in is the exact solutions. For your convenience I have included splash files, that will setup plotting with exact solutions for the specified problem. 
+Dump files for a completed simulation are in a ascii format with the prefix "snap_" and can be visuallised using the plotting software of your choice. However, I recommend using SPLASH, which can be downloaded from https://users.monash.edu.au/~dprice/splash/. SPLASH has many useful features, however the one we are most interested in is the exact solutions. For your convenience I have included splash files, that will setup plotting with exact solutions for the specified problem.
+A single dump file can be plotted with "splash snap_*dumpfile*", and every dump file can be plotted using the glob command "splash snap_*". You can also check the total energy evolution of the simulation with "splash -ev *.ev".  
 
 ## Acknowledgments
