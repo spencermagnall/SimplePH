@@ -1,3 +1,4 @@
+![alt text](https://github.com/spencermagnall/ShitPH/raw/master/images/animatedgif.gif)
 # SimplePH
 A simple Smoothed Particle Hydrodynamics Code written in C
 ## Description
