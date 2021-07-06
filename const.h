@@ -1,6 +1,12 @@
 #ifndef CONST_H
 #define CONST_H
 
+
+// POSIX DEFINITION OF PI
+#ifndef M_PI
+#define M_PI (3.14159265358979323846)
+#endif
+
 // flag for sod options 
 //#define isSod 0 
 

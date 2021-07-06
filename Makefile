@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -O3 -std=c18 -Wall -g -Wextra 
+CFLAGS = -O3 -Wall -g -Wextra 
 #DEPS =
 EOS = eos_isothermal.c
 #EOS = eos_adiabatic.c
@@ -30,7 +30,7 @@ OBJS = $(SRCS:.c=.o)
 MAIN = SPH
 
 $(MAIN): $(OBJS)
-	$(CC) $(CFLAGS) -o $(MAIN) $(OBJS)
+	$(CC) $(CFLAGS) -o $(MAIN) $(OBJS) -lm
 
 .c.o:
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -39,3 +39,12 @@ clean:
 cleanruns:
 	rm -f snap_*
 	rm -f *.ev
+	rm -f splash.defaults
+	rm -f splash.limits
+plotstanding:
+plotiso:
+	cp iso.splash.defaults splash.defaults
+	cp iso.splash.limits splash.limits
+plotadb:
+	cp adb.splash.defaults splash.defaults
+	cp adb.splash.limits splash.limits
